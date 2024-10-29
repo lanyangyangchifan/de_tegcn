@@ -245,12 +245,12 @@ class Processor():    #定义一个名为 Processor 的类，用于处理与基�
                 arg.model_saved_name = os.path.join(arg.work_dir, 'runs')    #设置模型保存路径为工作目录下的 runs 文件夹
                 if os.path.isdir(arg.model_saved_name):    #检查该路径是否已存在
                     print('log_dir: ', arg.model_saved_name, 'already exist')    #打印消息，告知用户该目录已存在
-                    answer = input('delete it? y/n:')    #提示用户是否删除该目录
-                    if answer == 'y':
-                        shutil.rmtree(arg.model_saved_name)    #使用 shutil.rmtree 删除该目录及其内容
-                        print('Dir removed: ', arg.model_saved_name)
-                    else:
-                        print('Dir not removed: ', arg.model_saved_name)
+                    # answer = input('delete it? y/n:')    #提示用户是否删除该目录
+                    # if answer == 'y':
+                    #     shutil.rmtree(arg.model_saved_name)    #使用 shutil.rmtree 删除该目录及其内容
+                    #     print('Dir removed: ', arg.model_saved_name)
+                    # else:
+                    #     print('Dir not removed: ', arg.model_saved_name)
                 self.train_writer = SummaryWriter(os.path.join(arg.model_saved_name, 'train'), 'train')    #创建 TensorBoard 的训练和验证日志写入器，分别用于记录训练和验证过程中的信息
                 self.val_writer = SummaryWriter(os.path.join(arg.model_saved_name, 'val'), 'val')
             else:
