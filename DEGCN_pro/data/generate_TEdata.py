@@ -1,0 +1,35 @@
+import numpy as np
+
+label_now = np.zeros(4307)
+print(label_now.shape)
+np.save('./data/TEgcn_无数据预处理/test_label.npy', label_now)   
+np.save('./data/TEgcn_有数据预处理/test_label.npy', label_now)   
+with open('./data/test_data.npz', 'rb') as file0:
+    data0 = np.load(file0)
+    x_tr = data0['x_train'].reshape(-1,300,2,17,3).transpose(0,4,1,3,2 )#N T M V C -> N C T V M
+    print(x_tr.shape)
+    y_tr = data0['y_train']
+    y_tr = np.argmax(y_tr, axis=1)
+    print(y_tr.shape)
+    print(y_tr)
+    x_te = data0['x_test'].reshape(-1,300,2,17,3).transpose(0,4,1,3,2 )
+    print(x_te.shape)
+with open('./data/val_data.npz', 'rb') as file1:
+    data1 = np.load(file1)
+    x_va = data1['x_test'].reshape(-1,300,2,17,3).transpose(0,4,1,3,2 )
+    print(x_va.shape)
+np.save('./data/TEgcn_有数据预处理/new_test_joint.npy',x_te)
+np.save('./data/TEgcn_有数据预处理/new_val_joint.npy',x_va)
+np.save('./data/TEgcn_有数据预处理/new_train_joint.npy',x_tr)
+np.save('./data/TEgcn_有数据预处理/new_train_label.npy',y_tr)
+x_tr = np.load('./data/train_joint.npy')
+y_tr = np.load('./data/train_label.npy')
+x_te = np.load('./data/test_joint.npy')
+x_va = np.load('./data/val_joint.npy')
+y_va = np.load('./data/val_label.npy')
+np.save('./data/TEgcn_无数据预处理/test_joint.npy',x_te)
+np.save('./data/TEgcn_无数据预处理/val_joint.npy',x_va)
+np.save('./data/TEgcn_无数据预处理/train_joint.npy',x_tr)
+np.save('./data/TEgcn_无数据预处理/train_label.npy',y_tr)
+np.save('./data/TEgcn_无数据预处理/val_label.npy',y_va)
+np.save('./data/TEgcn_有数据预处理/val_label.npy',y_va)
